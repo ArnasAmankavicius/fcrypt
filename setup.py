@@ -1,12 +1,13 @@
 from setuptools import setup, find_packages
+from src.fcrypt import __version__
 
 setup(
     name="fcrypt",
     author="Arnas Amankavicius",
-    author_email="https://github.com/pradeepsen99",
+    author_email="https://github.com/ArnasAmankavicius",
     maintainer="Arnas Amankavicius",
     maintainer_email="https://github.com/ArnasAmankavicius",
-    version='1.0.0',
+    version=__version__,
     packages=find_packages(),
     include_package_data=True,
     python_requires=">=3.6",

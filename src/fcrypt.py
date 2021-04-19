@@ -1,14 +1,9 @@
 from . import encryptor, logger
 import os
 import argparse
-import enum
 from platform import system, release
 from pathlib import Path
 from time import sleep
-
-class STATE(enum.Enum):
-    ENC = 1
-    DEC = 2
 
 __version__ = '1.0.0'
 
@@ -17,12 +12,6 @@ system_release = release()
 
 current_dir = os.getcwd()
 default_key_path = '\\default.key' if system_os == 'Windows' else '/default.key'
-
-starts_with = 'enc__'
-
-state = STATE.DEC
-
-files_dir = {}
 
 key = None
 
@@ -58,24 +47,10 @@ def setup_parser():
     parser.add_argument('--version', action='version', version=f'Crypto @ {__version__}', help='Display app version')
     return parser.parse_args()
 
-def file_check(path: str):
-    for root, _, files in os.walk(path):
-        for name in files:
-            file_path = os.path.join(root,name).replace('enc_', '')
-            if name.startswith(starts_with):
-                files_dir.update({file_path: 'enc'})
-            else:
-                files_dir.update({file_path: 'dec'})
-
-def input_callback(data):
-    global state
-    if data.lower() == 'd':
-        state = STATE.DEC
-    elif data.lower() == 'e':
-        state = STATE.ENC
-
 def exec():
     args = setup_parser()
+
+    print(info)
 
     decrypt = args.decrypt
     override = args.yes
